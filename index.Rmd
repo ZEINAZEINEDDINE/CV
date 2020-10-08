@@ -1,0 +1,197 @@
+---
+title: "Zeina Zeineddin's CV"
+author: Zeina Zeineddine
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/styles.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(glue)
+library(tidyverse)
+library( pagedown )
+library( pander )
+
+# Set this to true to have links turned into footnotes at the end of the document
+PDF_EXPORT <- FALSE
+
+# Holds all the links that were inserted for placement at the end
+links <- c()
+
+source('parsing_functions.R')
+
+# Load csv with position info
+position_data <- read_csv('positions.csv')
+```
+
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+if(PDF_EXPORT){
+  cat("
+  <style>
+  :root{
+    --decorator-outer-offset-left: -6.5px;
+  }
+  </style>")
+}
+```
+
+
+Aside
+================================================================================
+
+
+![logo](beta_dist.png){width=100%}
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+if(PDF_EXPORT){
+  cat("View this CV online with links at _nickstrayer.me/cv_")
+} else {
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf)")
+}
+```
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+
+- <i class="fa fa-envelope"></i> zeina.zeineldine@gmail.com
+- <i class="fa fa-twitter"></i> NA
+- <i class="fa fa-github"></i> github.com/ZEINAZEINEDDINE
+- <i class="fa fa-link"></i> [ZEINAZD](https://www.linkedin.com/in/zena-zeineddine-a1751751/)
+- <i class="fa fa-phone"></i> (961) 71-579940
+
+
+
+Language Skills {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+skills <- tribble(
+  ~skill,               ~level,
+  "R",                   5,
+  "English",             5,
+  "Arabic",              5
+  )
+
+
+```
+
+
+
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
+
+The source code is available at [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
+
+Last updated on `r Sys.Date()`.
+
+
+
+
+Main
+================================================================================
+
+Zeina Zeineddine {#title}
+--------------------------------------------------------------------------------
+
+
+```{r}
+intro_text <- "Throughout my career I have maintained the highest performance standards within a diverse range of administrative functions.I have exceptional interpersonal and communication skills, strong attention to detail and ability to work as a team player and under pressure.
+
+Currently searching for a full time position that allows me to put my education and experience into pracvtice. 
+"
+
+cat(sanitize_links(intro_text))
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'education')
+```
+
+Research Experience {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'research_positions')
+```
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+Industry Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+::: aside
+I have worked in a variety of roles ranging from Project Assistant to Project Coordinator to Business Development Officer. I like collaborative positive environments which makes me able to contribute to the company effectively, and foster my organizational and communication skills.
+:::
+
+```{r}
+print_section(position_data, 'industry_positions')
+```
+
+<br>
+<br>
+<br>
+
+Teaching Experience {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+::: aside
+I am passionate about education. There is nothing as interesting as educating young minds where this experience has helped in enhancing many of my interpersonal skills. 
+:::
+
+```{r}
+print_section(position_data, 'teaching_positions')
+```
+
+
+Certificates {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'Certificates')
+```
+
+
+Skills {data-icon=suitcase}
+--------------------------------------------------------------------------------
+```{r}
+print_section(position_data, 'Skills')
+```
+  
+
+References {data-icon=suitcase}
+--------------------------------------------------------------------------------
+```{r}
+print_section(position_data, 'References')
+```
