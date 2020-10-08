@@ -71,12 +71,15 @@ Language Skills {#skills}
 ```{r}
 skills <- tribble(
   ~skill,               ~level,
-  "R",                   5,
-  "English",             5,
-  "Arabic",              5
+  "R",                   4,
+  "Java",                2,
+  "Phyton",              3,
+  "Javascript",          2,
+  "SQL",                 3,
+  "C",                   2,
   )
 
-
+build_skill_bars(skills)
 ```
 
 
